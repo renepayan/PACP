@@ -5,14 +5,20 @@ CFLAGS=-Wall
 LDFLAGS=-lm
 CC=gcc
 all: $(PROYECTO)
-muestreo.o: muestreo.c
-	$(CC) -c muestreo.c $(CFLAGS)
-procesamiento.o: procesamiento.c
-	$(CC) -c procesamiento.c $(CFLAGS)
-archivos.o: archivos.c
-	$(CC) -c archivos.c $(CFLAGS)
-muestreo: muestreo.o archivos.o procesamiento.o
-	$(CC) muestreo.o archivos.o procesamiento.o -o $(PROYECTO) $(LDFLAGS)
+%.o:%.c
+	$(CC) -c $< $(CFLAGS)
+$(PROYECTO): muestreo.o procesamiento.o archivos.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+#$(PROYECTO): muestreo.o procesamiento.o archivos.o
+#	$(CC) muestreo.o procesamiento.o archivos.o -o $(PROYECTO) $(LDFLAGS)
+#muestreo.o: muestreo.c
+#	$(CC) -c muestreo.c $(CFLAGS)
+#procesamiento.o: procesamiento.c
+#	$(CC) -c procesamiento.c $(CFLAGS)
+#archivos.o: archivos.c
+#	$(CC) -c archivos.c $(CFLAGS)
+#muestreo: muestreo.o archivos.o procesamiento.o
+#	$(CC) muestreo.o archivos.o procesamiento.o -o $(PROYECTO) $(LDFLAGS)
 clean:
 	rm -rf *.a
 	rm -rf $(PROYECTO)
