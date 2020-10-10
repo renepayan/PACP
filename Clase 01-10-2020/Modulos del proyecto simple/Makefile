@@ -4,11 +4,14 @@ DESTDIR=/usr/local/bin
 CFLAGS=-Wall
 LDFLAGS=-lm
 CC=gcc
+SRCS=$(wildcard *.c)
 all: $(PROYECTO)
 %.o:%.c
 	$(CC) -c $< $(CFLAGS)
-$(PROYECTO): muestreo.o procesamiento.o archivos.o
+$(PROYECTO): $(SRCS:.c=.o)
 	$(CC) $^ -o $@ $(LDFLAGS)
+#$(PROYECTO): muestreo.o procesamiento.o archivos.o
+#	$(CC) $^ -o $@ $(LDFLAGS)
 #$(PROYECTO): muestreo.o procesamiento.o archivos.o
 #	$(CC) muestreo.o procesamiento.o archivos.o -o $(PROYECTO) $(LDFLAGS)
 #muestreo.o: muestreo.c

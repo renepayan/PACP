@@ -8,5 +8,5 @@
 int main(void){
 	float seno[MUESTRAS];
 	genera_seno(seno);
-	guarda_datos(seno);	
+	guarda_datos(seno);
 }
