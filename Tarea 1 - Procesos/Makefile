@@ -23,3 +23,5 @@ install: all
 	sudo cp $(PROYECTO) $(DESTDIR)
 uninstall:
 	sudo rm -rf $(DESTDIR)/$(PROYECTO)
+zip:
+	zip $(PROYECTO).zip *.c Makefile

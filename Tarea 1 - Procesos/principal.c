@@ -7,12 +7,11 @@
 #include <stdlib.h>
 int main(void){
 	register int i;
-	pid_t pids[3];
+	pid_t pids[4];
 	int* datos = reservarMemoria();
 	llenarArreglo(datos);
 	imprimirArreglo(datos);
 	for(i = 0;i < NUM_PROC; i++){
-		printf("%d",i);
 		pids[i] = fork();
 		if(pids[i] == -1){
 			perror("Error al crear al hijo\n");

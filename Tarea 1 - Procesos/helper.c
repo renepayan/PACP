@@ -12,7 +12,7 @@ int* reservarMemoria(){
 void llenarArreglo(int* arreglo){
 	register int i;
 	for(i = 0; i < N; i++){
-		arreglo[i] = rand();
+		arreglo[i] = rand()%200;
 	}
 }
 void imprimirArreglo(int* arreglo){
@@ -21,7 +21,7 @@ void imprimirArreglo(int* arreglo){
 		if(i%8 == 0 && i > 0){
 			printf("\n");						
 		}
-		printf("%10d ",arreglo[i]);
+		printf("%3d ",arreglo[i]);
 	}	
 	printf("\n");
 }
