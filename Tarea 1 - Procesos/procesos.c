@@ -1,29 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "defs.h"
-#include "helper.h"
 #include "procesamiento.h"
 
-int procesoHijo(int np, int* datos){
-	imprimirArreglo(datos);
+int procesoHijo(int np, int* datos){	
 	int mayor, menor, numeroDePares, promedio;
 	switch(np){
-		case 1:
+		case 0:
 			mayor = obtenerMayor(datos);
-			printf("mayor:%d\n",promedio);
+			printf("mayor:%d\n",mayor);
 			exit(mayor);
 		break;
-		case 2:
+		case 1:
 			menor = obtenerMenor(datos);
-			printf("menor:%d\n",promedio);
+			printf("menor:%d\n",menor);
 			exit(menor);
 		break;
-		case 3:
+		case 2:
 			numeroDePares = obtenerNumeroDePares(datos);
-			printf("par:%d\n",promedio);
+			printf("par:%d\n",numeroDePares);
 			exit(numeroDePares);
 		break;
-		case 4:
+		case 3:
 			promedio = (int)obtenerPromedio(datos);
 			printf("prom:%d\n",promedio);
 			exit(promedio);
