@@ -33,19 +33,14 @@ void procesoPadre(pid_t pids[3]){
 		pid = wait(&estado);
 		respuesta = estado << 8;
 		printf("El proceso %d termino con la siguiente respuesta: %d",pid,respuesta);
-		switch((int)pid){
-			case (int)pids[0]:
-				printf(" (Estaba buscando el mayor)\n");
-				break;
-			case (int)pids[1]:
-				printf(" (Estaba buscando el menor)\n");
-				break;
-			case (int)pids[2]:
-				printf(" (Estaba buscando el numero de pares)\n");
-				break;
-			case (int)pids[3]:
-				printf(" (Estaba buscando el promedio)\n");
-				break;				
-		}
+		if((int)pid == (int)pids[0]){
+			printf(" (Estaba buscando el mayor)\n");
+		}else if((int)pid == (int)pids[1]){
+			printf(" (Estaba buscando el menor)\n");
+		}else if((int)pid == (int)pids[2]){
+			printf(" (Estaba buscando el numero de pares)\n");
+		}else if((int)pid == (int)pids[3]){
+			printf(" (Estaba buscando el promedio)\n");
+		}		
 	}	
 }
