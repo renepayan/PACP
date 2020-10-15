@@ -8,18 +8,22 @@ int procesoHijo(int np, int* datos){
 	switch(np){
 		case 1:
 			mayor = obtenerMayor(datos);
+			printf("mayor:%d\n",promedio);
 			exit(mayor);
 		break;
 		case 2:
 			menor = obtenerMenor(datos);
+			printf("menor:%d\n",promedio);
 			exit(menor);
 		break;
 		case 3:
 			numeroDePares = obtenerNumeroDePares(datos);
+			printf("par:%d\n",promedio);
 			exit(numeroDePares);
 		break;
 		case 4:
 			promedio = (int)obtenerPromedio(datos);
+			printf("prom:%d\n",promedio);
 			exit(promedio);
 		break;
 	}
