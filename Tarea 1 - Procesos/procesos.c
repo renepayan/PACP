@@ -32,11 +32,10 @@ int procesoHijo(int np, int* datos){
 void procesoPadre(pid_t pids[3]){
 	register int i;
 	pid_t pid;
-	int estado, respuesta;
+	int estado;
 	for(i = 0; i < NUM_PROC; i++){
-		pid = wait(&estado);
-		respuesta = estado << 8;
-		printf("El proceso %d termino con la siguiente respuesta: %d",pid,respuesta);
+		pid = wait(&estado);		
+		printf("El proceso %d termino con la siguiente respuesta: %d",pid,estado<<8);
 		if((int)pid == (int)pids[0]){
 			printf(" (Estaba buscando el mayor)\n");
 		}else if((int)pid == (int)pids[1]){

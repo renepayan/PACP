@@ -12,6 +12,7 @@ int main(void){
 	llenarArreglo(datos);
 	imprimirArreglo(datos);
 	for(i = 0;i < NUM_PROC; i++){
+		printf("%d",i);
 		pids[i] = fork();
 		if(pids[i] == -1){
 			perror("Error al crear al hijo\n");
