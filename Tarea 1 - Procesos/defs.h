@@ -1,5 +1,5 @@
 #ifndef DEFS_H
-#define
+#define DEFS_H
 #define N 128
-#define NUM_PROCS 4
+#define NUM_PROC 4
 #endif

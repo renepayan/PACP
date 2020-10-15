@@ -21,6 +21,7 @@ void imprimirArreglo(int* arreglo){
 		if(i%8 == 0 && i > 0){
 			printf("\n");						
 		}
-		printf("%d ",arreglo[i]);
+		printf("%10d ",arreglo[i]);
 	}	
+	printf("\n");
 }

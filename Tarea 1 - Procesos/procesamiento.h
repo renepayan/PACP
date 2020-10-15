@@ -1,5 +1,5 @@
 #ifndef PROCESAMIENTO_H
-#define
+#define PROCESAMIENTO_H
 int obtenerMayor(int* datos);
 int obtenerMenor(int* datos);
 int obtenerPromedio(int* datos);
