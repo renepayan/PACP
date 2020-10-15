@@ -7,19 +7,19 @@
 #include <stdlib.h>
 int main(void){
 	register int i;
-	pid_t pid;
+	pid_t[3] pids;
 	int* datos = reservarMemoria();
 	llenarArreglo(datos);
 	imprimirArreglo(datos);
 	for(i = 0;i < NUM_PROC; i++){
-		pid = fork();
-		if(pid == -1){
+		pids[i] = fork();
+		if(pids[i] == -1){
 			perror("Error al crear al hijo\n");
 			exit(EXIT_FAILURE);
 		}
-		if(!pid){
+		if(!pids[i]){
 			procesoHijo(i, datos);
 		}
 	}
-	procesoPadre();
+	procesoPadre(pids);
 }
