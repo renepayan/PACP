@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "defs.h"
+#include "helper.h"
 #include "procesamiento.h"
 
 int procesoHijo(int np, int* datos){
+	imprimirArreglo(datos);
 	int mayor, menor, numeroDePares, promedio;
 	switch(np){
 		case 1:
