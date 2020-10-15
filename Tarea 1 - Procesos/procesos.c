@@ -25,7 +25,7 @@ int procesoHijo(int np, int* datos){
 	}
 	exit(np);
 }
-void procesoPadre(pid_t[3] pids){
+void procesoPadre(pid_t pids[3]){
 	register int i;
 	pid_t pid;
 	int estado, respuesta;
@@ -33,17 +33,17 @@ void procesoPadre(pid_t[3] pids){
 		pid = wait(&estado);
 		respuesta = estado << 8;
 		printf("El proceso %d termino con la siguiente respuesta: %d",pid,respuesta);
-		switch(pid){
-			case pids[0]:
+		switch((int)pid){
+			case (int)pids[0]:
 				printf(" (Estaba buscando el mayor)\n");
 				break;
-			case pids[1]:
+			case (int)pids[1]:
 				printf(" (Estaba buscando el menor)\n");
 				break;
-			case pids[2]:
+			case (int)pids[2]:
 				printf(" (Estaba buscando el numero de pares)\n");
 				break;
-			case pids[3]:
+			case (int)pids[3]:
 				printf(" (Estaba buscando el promedio)\n");
 				break;				
 		}

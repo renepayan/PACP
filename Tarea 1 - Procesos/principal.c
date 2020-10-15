@@ -7,7 +7,7 @@
 #include <stdlib.h>
 int main(void){
 	register int i;
-	pid_t[3] pids;
+	pid_t pids[3];
 	int* datos = reservarMemoria();
 	llenarArreglo(datos);
 	imprimirArreglo(datos);
