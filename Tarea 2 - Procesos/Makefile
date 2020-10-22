@@ -1,4 +1,4 @@
-# Archivo Makefile para Tarea 1 - Procesos
+# Archivo Makefile para Tarea 2 - Procesos
 PROYECTO=tarea2_Procesos
 DESTDIR=/usr/local/bin
 CFLAGS=-Wall

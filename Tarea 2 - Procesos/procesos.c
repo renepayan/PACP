@@ -43,20 +43,22 @@ void proceso_padre(int pipefd[NUM_PROC][2] ){
 			read( pipefd[numproc][0], datos, sizeof(int)*N );	
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);	
 			printf("Este es el arreglo ordenado:\n");
-            imprimirArreglo(datos);
+		        imprimirArreglo(datos);
+			free(datos);
 		}else if( numproc == 1){
 			read( pipefd[numproc][0], datos, sizeof(int)*N );	
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);			
 			printf("Este es el arreglo multiplicado:\n");
-            imprimirArreglo(datos);			
+	                imprimirArreglo(datos);			
+			free(datos);
 		}else if( numproc == 2){
 			read( pipefd[numproc][0], &resultado, sizeof(int) );	
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);
-            printf("El numero de pares es %d\n",resultado);
+		        printf("El numero de pares es %d\n",resultado);
 		}else if( numproc == 3){
 			read( pipefd[numproc][0], &resultado, sizeof(int) );	
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);			
-            printf("El promedio es %d\n",resultado);
+		        printf("El promedio es %d\n",resultado);
 		}
 		close( pipefd[numproc][0] );
 	}	
