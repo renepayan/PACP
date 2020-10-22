@@ -46,10 +46,10 @@ void proceso_padre(int pipefd[NUM_PROC][2]){
 		}else if( numproc == 1){
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);
             printf("La resta es %d\n",resultado);
-		}else if( numproc == 1){
+		}else if( numproc == 2){
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);
             printf("La multiplicacion es %d\n",resultado);
-		}else if( numproc == 2){
+		}else if( numproc == 3){
 			printf("Termino el proceso %d con pid: %d\n",numproc,pid);
             printf("La division es %d\n",resultado);
 		}
