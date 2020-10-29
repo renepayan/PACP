@@ -50,12 +50,13 @@ void* funHilo( void *arg){
 	for(i = inicio; i < fin; i++){
 		C[i] = A[i]*B[i];
 	}
+	pthread_exit(arg);
 }
 void llenarArreglo(int* datos){
 	register int i = 0;
 	for(i = 0; i < N; i++){
 		datos[i] = rand();
-	}
+	}	
 }
 void imprimirArreglo(int* datos){
 	register int i = 0;
