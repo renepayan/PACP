@@ -14,11 +14,10 @@ int main(void){
 	register int np;	
 	int pipefd[NUM_PROC][2], edo_pipe;
 	datos = reservarMemoria();	
-	ventana = reservarMemoriaDouble();
+	ventana = reservarMemoria();
 	producto = reservarMemoria();
-
 	leerArchivo(datos, "PulseSensor.dat");	
-	ventanaHann(ventana);	
+	ventanaHann(ventana);
 	for(np = 0; np <  NUM_PROC; np++){
 		edo_pipe = pipe(&pipefd[np][0]);
 		if(edo_pipe == -1){
