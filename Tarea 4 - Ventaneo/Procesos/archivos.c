@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "defs.h"
-void leerArchivo(int* datos, char* nombreArchivo){
+void leerArchivo(double* datos, char* nombreArchivo){
     FILE *in_file  = fopen(nombreArchivo, "r");
     register int i;
     if( in_file == NULL){
@@ -9,7 +9,7 @@ void leerArchivo(int* datos, char* nombreArchivo){
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < N; i++){
-        fscanf(in_file, "%d", &datos[i]);
+        fscanf(in_file, "%lf", &datos[i]);
     }
     fclose(in_file);
 }

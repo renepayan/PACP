@@ -6,18 +6,18 @@
 #include "procesamiento.h"
 #include "procesos.h"
 #include "helper.h"
-int* datos;
-int* ventana;
-int* producto;
+double* datos;
+double* ventana;
+double* producto;
 int main(void){	
 	pid_t pid;
 	register int np;	
 	int pipefd[NUM_PROC][2], edo_pipe;
 	datos = reservarMemoria();	
-	ventana = reservarMemoria();
+	ventana = reservarMemoriaDouble();
 	producto = reservarMemoria();
 
-	leerArchivo(datos, "PulseSensor.dat");
+	leerArchivo(datos, "PulseSensor.dat");	
 	ventanaHann(ventana);	
 	for(np = 0; np <  NUM_PROC; np++){
 		edo_pipe = pipe(&pipefd[np][0]);

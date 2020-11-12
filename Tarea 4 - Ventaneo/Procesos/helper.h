@@ -1,6 +1,6 @@
 #ifndef HELPER_H
 #define HELPER_H
 int* reservarMemoria();
-void llenarArreglo(int* arreglo);
-void imprimirArreglo(int* arreglo);
+void llenarArreglo(double* arreglo);
+void imprimirArreglo(double* arreglo);
 #endif
