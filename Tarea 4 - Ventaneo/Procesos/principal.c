@@ -18,10 +18,7 @@ int main(void){
 	producto = reservarMemoria();
 
 	leerArchivo(datos, "PulseSensor.dat");
-	ventanaHann(ventana);
-	for(int i = 0; i < N; i++){		
-		printf("%d %d\n",datos[i], ventana[i]);
-	}
+	ventanaHann(ventana);	
 	for(np = 0; np <  NUM_PROC; np++){
 		edo_pipe = pipe(&pipefd[np][0]);
 		if(edo_pipe == -1){
