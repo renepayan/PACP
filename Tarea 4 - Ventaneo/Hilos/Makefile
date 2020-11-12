@@ -1,5 +1,5 @@
 # Archivo Makefile para Tarea 4 - Ventaneo
-PROYECTO=tarea4_Ventaneo_Procesos
+PROYECTO=tarea4_Ventaneo_Hilos
 DESTDIR=/usr/local/bin
 CFLAGS=-Wall -lpthread
 LDFLAGS=-lm -lpthread

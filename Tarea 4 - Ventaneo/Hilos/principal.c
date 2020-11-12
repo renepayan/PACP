@@ -1,39 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include <pthread.h>
 #include "archivos.h"
 #include "procesamiento.h"
-#include "procesos.h"
+#include "hilos.h"
 #include "helper.h"
+#include "defs.h"
 double* datos;
 double* ventana;
 double* producto;
-int main(void){	
-	pid_t pid;
-	register int np;	
-	int pipefd[NUM_PROC][2], edo_pipe;
+int main(void){		
+	int *hilo;
+	pthread_t tids[NUM_HILOS];
+	int nhs[NUM_HILOS];
+	register int nh;
 	datos = reservarMemoria();	
 	ventana = reservarMemoria();
 	producto = reservarMemoria();
 	leerArchivo(datos, "PulseSensor.dat");	
 	ventanaHann(ventana);
-	for(np = 0; np <  NUM_PROC; np++){
-		edo_pipe = pipe(&pipefd[np][0]);
-		if(edo_pipe == -1){
-			printf("Error al crear la tuberia...\n");
+	for( nh = 0; nh < NUM_HILOS; nh++){
+		nhs[nh] = nh;
+		if(pthread_create(  &tids[nh], NULL, funHilo,  &nhs[nh] )){
+			perror("Error al crear el hilo\n");
 			exit(EXIT_FAILURE);
-		}	
-		pid = fork();
-		if( pid == -1){
-			perror("Error al crear el proceso.....\n");
-			exit(EXIT_FAILURE);
-		}
-		if( !pid ){
-			proceso_hijo(np, &pipefd[np][0]);
 		}
 	}
-	proceso_padre(pipefd);
+	for( nh = 0; nh < NUM_HILOS; nh++ ){
+		pthread_join( tids[nh], (void**)&hilo);
+		printf("Termino el hilo %d\n", *hilo);
+	}	
 	printf("Guardando la ventana\n");
 	escribirArchivo(ventana, "ventana.dat");
 	printf("Guardando el producto\n");
