@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "defs.h"
 void leerArchivo(int* datos, char* nombreArchivo){
     FILE *in_file  = fopen(nombreArchivo, "r");
@@ -7,7 +9,7 @@ void leerArchivo(int* datos, char* nombreArchivo){
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < N; i++){
-        fscanf(fp, "%d", datos[i]);
+        fscanf(in_file, "%d", &datos[i]);
     }
     fclose(in_file);
 }

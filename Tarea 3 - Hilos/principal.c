@@ -9,12 +9,16 @@ int* datos;
 int numeroDePares;
 int promedio;
 int numeroDePrimos;
+pthread_mutex_t exclusor;
 int main(void){	
 	register int nh;	
 	int* hilo;
 	pthread_t tids[NUM_HILOS];
 	int nhs[NUM_HILOS];
-	
+	if(pthread_mutex_init(&exclusor,NULL)==-1){
+		perror("Error al crear el mutex\n");
+		exit(EXIT_FAILURE);	
+	}
 	
 	datos = reservarMemoria();
 	llenarArreglo(datos);
@@ -43,4 +47,6 @@ int main(void){
 			break;
 		}
 	}
+	pthread_mutex_destroy(&exclusor);
+	free(datos);
 }

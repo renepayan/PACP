@@ -8,7 +8,7 @@
 extern int* datos;
 extern int* ventana;
 extern int* producto;
-void proceso_hijo(int np, int* datos, int pipefd[]){
+void proceso_hijo(int np, int pipefd[]){
 	close(pipefd[0]);
 	int* retorno = malloc((N/NUM_PROC)*sizeof(int));	
 	register int i;

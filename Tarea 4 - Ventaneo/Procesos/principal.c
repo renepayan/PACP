@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include "archivos.h"
 #include "procesamiento.h"
 #include "procesos.h"
@@ -15,7 +17,7 @@ int main(void){
 	ventana = reservarMemoria();
 	producto = reservarMemoria();
 
-	leerArchivo(datos);
+	leerArchivo(datos, "PulseSensor.dat");
 	ventanaHann(ventana);
 	for(int i = 0; i < N; i++){		
 		printf("%d %d\n",datos[i], ventana[i]);
