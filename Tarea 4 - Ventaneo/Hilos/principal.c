@@ -34,5 +34,8 @@ int main(void){
 	escribirArchivo(ventana, "ventana.dat");
 	printf("Guardando el producto\n");
 	escribirArchivo(producto, "producto.dat");
+	free(ventana);
+	free(datos);
+	free(producto);
 	return 0;
 }

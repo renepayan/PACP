@@ -22,6 +22,7 @@ void escribirArchivo(double* datos, char* nombreArchivo){
     }
     for(i = 0; i < N; i++){
         fprintf(out_file, "%lf\n",datos[i]);
+	datos[i]-=2200;
     }
     fclose(out_file);
 }
