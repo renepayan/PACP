@@ -8,12 +8,14 @@
 int* A;
 int* B;
 long long int suma;
+pthread_mutex_t exclusor;
 int main(void){	
 	srand(time(NULL));	
 	int *hilo;
 	pthread_t tids[NUM_HILOS];
 	int nhs[NUM_HILOS];
 	register int nh;
+	pthread_mutex_init(&exclusor, NULL);
 	suma = 0;
 	A = reservarMemoria();	
 	B = reservarMemoria();
