@@ -1,5 +1,6 @@
 #include <pthread.h>
 #include "defs.h"
+#include "procesamiento.h"
 extern double* datosPulsoCardiaco;
 extern double* ventanaDeHann;
 extern double* producto;
@@ -15,16 +16,12 @@ void* funHilo( void *arg){
 }
 void* funHiloDiscreta(void* arg){
 	register int l;
-	register int n;
 	int nh = *((int*)arg);	
 	int tamBloque = L/NUM_HILOS;
 	int inicioBloque = tamBloque*nh;
 	int finBloque = inicioBloque+tamBloque;	
 	for(l = inicioBloque; l < finBloque; l++){
-		funcionDiscreta[l] = 0;
-		for(n = l; n < N; n++){						
-			funcionDiscreta[l] += producto[n]*producto[n-l];
-		}		
+		funcionDiscreta[l] = rxx(l, producto);		
 	}
 	pthread_exit(arg);
 }

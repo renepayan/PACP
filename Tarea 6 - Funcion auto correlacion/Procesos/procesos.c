@@ -47,16 +47,12 @@ void proceso_padre(int pipefd[NUM_PROC][2] ){
 void procesoHijoFuncionDiscreta(int np, int pipefd[]){		
 	close(pipefd[0]);	
 	register int l;
-	register int n;
 	double* retorno = malloc((L/NUM_PROC)*sizeof(double));
 	int tamanio = L/NUM_PROC;
 	int inicioArreglo = np*tamanio;
 	int finArreglo = inicioArreglo + tamanio;				
 	for(l = inicioArreglo; l < finArreglo; l++){
-		retorno[l - inicioArreglo] = 0;
-		for(n = l; n<N; n++){
-			retorno[l-inicioArreglo]+=producto[n]*producto[n-l];			
-		}				
+		retorno[l - inicioArreglo] = rxx(l,producto);					
 	}			
 	write(pipefd[1], retorno, sizeof(double)*(L/NUM_PROC));
 	close(pipefd[1]);

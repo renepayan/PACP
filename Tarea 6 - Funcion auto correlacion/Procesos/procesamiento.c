@@ -9,3 +9,11 @@ void ventanaHann(double* datos){
 		datos[i] = valor;
 	}
 }
+double rxx(int l, double* producto){
+	double retorno = 0;
+	register int n;
+	for(n = l; n<N; n++){
+		retorno+=producto[n]*producto[n-l];			
+	}	
+	return retorno;
+}
