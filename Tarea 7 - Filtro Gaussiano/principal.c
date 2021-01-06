@@ -18,7 +18,7 @@ int main( )
 	bmpInfoHeader info;
 	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
 
-	imagenRGB = abrirBMP("dark_forest3.bmp", &info );
+	imagenRGB = abrirBMP("huella.bmp", &info );
 	displayInfo( &info );
 
 	imagenGray = reservarMemoria( info.width, info.height );
@@ -32,7 +32,7 @@ int main( )
 	
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
-    guardarBMP("dark_forestGauss.bmp", &info, imagenRGB );
+    guardarBMP("huellaGauss.bmp", &info, imagenRGB );
 
     free( imagenFiltrada );
 	free(imagenGray);
@@ -92,10 +92,8 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 			double razonX = (double)( (-DIMASK/2+i) * (-DIMASK/2+i) );
 			double razonY = (double)( (-DIMASK/2+j) * (-DIMASK/2+j) );
 			double contenido = -((razonX+razonY)/division);
-			mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
-			printf("%f ",mascara[DIMASK*i+j]);			
-		}
-		printf("\n");
+			mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);			
+		}		
 	}		
 	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
