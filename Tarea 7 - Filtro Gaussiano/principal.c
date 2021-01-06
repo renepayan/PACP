@@ -106,7 +106,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 					indicei = (y+ym)*width + (x+xm);
 					conv += ((double)imagenG[indicei] * mascara[indicem++]);
 				}
-			conv = conv / 9;
+			//conv = conv / 9;
 			indicei = (y)*width + (x);
 			imagenF[indicei] = conv;
 		}
