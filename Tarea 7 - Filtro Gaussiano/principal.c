@@ -18,7 +18,7 @@ int main( )
 	bmpInfoHeader info;
 	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
 
-	imagenRGB = abrirBMP("huella.bmp", &info );
+	imagenRGB = abrirBMP("linux.bmp", &info );
 	displayInfo( &info );
 
 	imagenGray = reservarMemoria( info.width, info.height );
@@ -32,7 +32,7 @@ int main( )
 	
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
-    guardarBMP("huellaGauss.bmp", &info, imagenRGB );
+    guardarBMP("linuxGauss.bmp", &info, imagenRGB );
 
     free( imagenFiltrada );
 	free(imagenGray);
