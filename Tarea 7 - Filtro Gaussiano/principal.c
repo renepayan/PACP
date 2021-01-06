@@ -18,7 +18,7 @@ int main( )
 	bmpInfoHeader info;
 	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
 
-	imagenRGB = abrirBMP("huella1.bmp", &info );
+	imagenRGB = abrirBMP("huella.bmp", &info );
 	displayInfo( &info );
 
 	imagenGray = reservarMemoria( info.width, info.height );
