@@ -80,7 +80,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 			double razonX = (double)( (i) * (i) );
 			double razonY = (double)( (j) * (j) );
 			double contenido = -((razonX+razonY)/division);
-			printf("%d %f %f %f %f\n",i,j,razonX,razonY,division,contenido;
+			printf("%d %f %f %f %f\n",i,j,razonX,razonY,division,contenido);
 			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
 		}
 	}
