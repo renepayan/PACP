@@ -28,7 +28,7 @@ int main( )
 
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
-    filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
+    filtroPB(imagenGray, imagenFiltrada, info.width, info.height);
 
     GrayToRGB( imagenFiltrada ,imagenGray, info.width, info.height );
 
