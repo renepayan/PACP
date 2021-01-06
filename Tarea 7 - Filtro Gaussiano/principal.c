@@ -72,9 +72,9 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 	int indicem, indicei, conv;
 	double **mascara;
 	mascara = (double**)malloc(sizeof(double*)*DIMASK);
-	for(i = 0; i < DIMASK; i++){
+	for(i = -DIMASK/2; i < DIMASK/2; i++){
 		mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
-		for(j = 0; j < DIMASK; j++){
+		for(j = -DIMASK/2; j < DIMASK/2; j++){
 			//( (double)( ( ( i+1 ) * ( i+1 ) ) + ( ( j + 1 ) * ( j + 1 ) ) )/(double)(2*VARIANZA) )
 			double division = (double)2.0 * VARIANZA;
 			double razonX = (double)( (i+1) * (i+1) );
