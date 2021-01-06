@@ -29,7 +29,6 @@ int main( )
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
     filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
-	brilloImagen(imagenFiltrada, info.width, info.height);
 	
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
@@ -108,7 +107,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 					conv += ((double)imagenG[indicei] * mascara[indicem++]);
 				}
 			conv = conv / 9;
-			indicei = (y+1)*width + (x+1);
+			indicei = (y)*width + (x);
 			imagenF[indicei] = conv;
 		}
 }
