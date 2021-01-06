@@ -73,7 +73,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 	for(i = 0; i < DIMASK; i++){
 		mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
 		for(j = 0; j < DIMASK; j++){
-			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(-((double)( ( ( i+1 ) * ( i+1 ) ) + ( ( j + 1 ) * ( j + 1 ) ) )/(double)(2*VARIANZA)));
+			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA)) /**exp(-((double)( ( ( i+1 ) * ( i+1 ) ) + ( ( j + 1 ) * ( j + 1 ) ) )/(double)(2*VARIANZA)))*/;
 		}
 	}
 	/*for( y = 0; y <= height-DIMASK; y++ )
