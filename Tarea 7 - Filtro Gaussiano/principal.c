@@ -84,15 +84,15 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 	register int i, j, x, y, xm, ym;
 	int indicem, indicei, conv;
 	double **mascara;
-	mascara = (double**)malloc(sizeof(double*)*DIMASK);
+	mascara = (double*)malloc(sizeof(double)*(DIMASK*DIMASK));
 	for(i = 0; i < DIMASK; i++){
-		mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
+		//mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
 		for(j = 0; j < DIMASK; j++){
 			double division = (double)2.0 * VARIANZA;
 			double razonX = (double)( (-DIMASK/2+i) * (-DIMASK/2+i) );
 			double razonY = (double)( (-DIMASK/2+j) * (-DIMASK/2+j) );
 			double contenido = -((razonX+razonY)/division);
-			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
+			mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
 		}
 	}	
 	for( y = 0; y <= height-DIMASK; y++ )
