@@ -98,12 +98,13 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
 		{			
+			indicem = 0;
 			conv = 0;
 			for( ym = 0; ym < DIMASK; ym++ )
 				for( xm = 0; xm < DIMASK; xm++ )
 				{
 					indicei = (y+ym)*width + (x+xm);
-					conv += ((double)imagenG[indicei] * mascara[ym][xm]);
+					conv += ((double)imagenG[indicei] * mascara[indicem++]);
 				}
 			conv = conv / 9;
 			indicei = (y+1)*width + (x+1);
