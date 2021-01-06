@@ -29,7 +29,8 @@ int main( )
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
     filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
-
+	brilloImagen(imagenFiltrada, info.width, info.height);
+	
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
     guardarBMP("dark_forestGauss.bmp", &info, imagenRGB );
