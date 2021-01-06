@@ -77,8 +77,8 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 		for(j = 0; j < DIMASK; j++){
 			//( (double)( ( ( i+1 ) * ( i+1 ) ) + ( ( j + 1 ) * ( j + 1 ) ) )/(double)(2*VARIANZA) )
 			double division = (double)2.0 * VARIANZA;
-			double razonX = (double)( (i) * (i) );
-			double razonY = (double)( (j) * (j) );
+			double razonX = (double)( (i+1) * (i+1) );
+			double razonY = (double)( (j+1) * (j+1) );
 			double contenido = -((razonX+razonY)/division);
 			printf("%d %d %f %f %f %f\n",i,j,razonX,razonY,division,contenido);
 			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
