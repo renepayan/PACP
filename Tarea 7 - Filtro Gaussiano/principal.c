@@ -78,7 +78,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA)) /**exp(-((double)( ( ( i+1 ) * ( i+1 ) ) + ( ( j + 1 ) * ( j + 1 ) ) )/(double)(2*VARIANZA)))*/;
 		}
 	}
-	/*for( y = 0; y <= height-DIMASK; y++ )
+	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
 		{
 			int primer = indicem/DIMASK, segundo = indicem%DIMASK;
@@ -94,7 +94,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 			conv = conv / 9;
 			indicei = (y+1)*width + (x+1);
 			imagenF[indicei] = conv;
-		}*/
+		}
 }
 
 void brilloImagen( unsigned char *imagenGray, uint32_t width, uint32_t height )
