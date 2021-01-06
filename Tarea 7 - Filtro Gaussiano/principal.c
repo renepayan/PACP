@@ -100,7 +100,8 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 				for( xm = 0; xm < DIMASK; xm++ )
 				{
 					int primer = indicem/DIMASK, segundo = indicem%DIMASK;
-					printf("%d %d\n", primer, segundo);
+					if(primer >= 5 || segundo >=5)
+						printf("%d %d\n", primer, segundo);
 					indicem++;
 					indicei = (y+ym)*width + (x+xm);
 					//conv += imagenG[indicei] * mascara[primer][segundo];
