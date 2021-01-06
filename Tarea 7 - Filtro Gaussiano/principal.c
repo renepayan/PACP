@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include "imagen.h"
 #define DIMASK 5
 #define VARIANZA 1
@@ -26,7 +27,7 @@ int main( )
 	RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
 	//brilloImagen( imagenGray, info.width, info.height );
-	filtroPB( imagenGray, imagenFiltrada, info.width, info.height );
+	filtroGaussiano( imagenGray, imagenFiltrada, info.width, info.height );
 
 	GrayToRGB( imagenRGB, imagenFiltrada, info.width, info.height );
 
@@ -65,7 +66,7 @@ void filtroPB( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, u
 }
 
 void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, uint32_t height ){
-	register int x, y, xm, ym;
+	register int i, j, x, y, xm, ym;
 	int indicem, indicei, conv;
 	double **mascara;
 	mascara = (double**)malloc(sizeof(double*)*DIMASK);
@@ -84,7 +85,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 				for( xm = 0; xm < DIMASK; xm++ )
 				{
 					indicei = (y+ym)*width + (x+xm);
-					conv += imagenG[indicei] * mascara[indicem++];
+					conv += imagenG[indicei] * mascara[indicem/DIMASK][indicem%DIMASK];
 				}
 			conv = conv / 9;
 			indicei = (y+1)*width + (x+1);
