@@ -26,13 +26,13 @@ int main( )
 
     memset( imagenGray, 255, info.width*info.height );
 
-    //RGBToGray( imagenRGB, imagenGray, info.width, info.height );
+    RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
     //filtroPB(imagenGray, imagenFiltrada, info.width, info.height);
 
-    //GrayToRGB( imagenRGB ,imagenGray, info.width, info.height );
+    GrayToRGB( imagenRGB ,imagenGray, info.width, info.height );
 
-    guardarBMP("dark_forest3Original.bmp", &info, imagenRGB );
+    guardarBMP("dark_forestGray.bmp", &info, imagenRGB );
 
     free( imagenFiltrada );
 	free(imagenGray);
