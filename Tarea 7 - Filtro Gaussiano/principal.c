@@ -30,8 +30,8 @@ int main( )
 	//brilloImagen( imagenGray, info.width, info.height );
 	filtroGaussiano( imagenGray, imagenFiltrada, info.width, info.height );
 	printf("Creo el filtro\n");
-	GrayToRGB( imagenRGB, imagenFiltrada, info.width, info.height );
-	printf("Lo regreso a color\n");
+	//GrayToRGB( imagenRGB, imagenFiltrada, info.width, info.height );
+	//printf("Lo regreso a color\n");
 	/*
 	guardarBMP("huella1final.bmp", &info, imagenRGB );
 
@@ -82,12 +82,6 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 			double contenido = -((razonX+razonY)/division);			
 			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
 		}
-	}
-	for(i = 0; i < DIMASK; i++){
-		for(j = 0; j < DIMASK; j++){
-			printf("%f ", mascara[i][j]);
-		}
-		printf("\n");
 	}
 	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
