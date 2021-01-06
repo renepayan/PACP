@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "imagen.h"
-#define DIMASK 5
+#define DIMASK 3
 #define VARIANZA 1
 void RGBToGray( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height );
 void GrayToRGB( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height );
