@@ -83,7 +83,7 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 
 	register int i, j, x, y, xm, ym;
 	int indicem, indicei, conv;
-	double **mascara;
+	double *mascara;
 	mascara = (double*)malloc(sizeof(double)*(DIMASK*DIMASK));
 	for(i = 0; i < DIMASK; i++){
 		//mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
