@@ -80,6 +80,13 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA));
 		}
 	}
+	for(i = 0; i < DIMASK; i++){
+		for(j = 0; j < DIMASK; j++){
+			printf("%3f ", mascara[i][j]);
+		}
+		printf("\n");
+	}
+	return;
 	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
 		{
