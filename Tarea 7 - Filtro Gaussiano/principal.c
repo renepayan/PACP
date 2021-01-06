@@ -28,11 +28,11 @@ int main( )
 
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
-    //filtroPB(imagenGray, imagenFiltrada, info.width, info.height);
+    filtroPB(imagenGray, imagenFiltrada, info.width, info.height);
 
     GrayToRGB( imagenRGB ,imagenGray, info.width, info.height );
 
-    guardarBMP("dark_forestGray.bmp", &info, imagenRGB );
+    guardarBMP("dark_forestPB.bmp", &info, imagenRGB );
 
     free( imagenFiltrada );
 	free(imagenGray);
