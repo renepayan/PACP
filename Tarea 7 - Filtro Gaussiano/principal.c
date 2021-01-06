@@ -83,33 +83,27 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 
 	register int i, j, x, y, xm, ym;
 	int indicem, indicei, conv;
-	double *mascara;
-	mascara = (double*)malloc(sizeof(double)*DIMASK);
+	double **mascara;
+	mascara = (double**)malloc(sizeof(double*)*DIMASK);
 	for(i = 0; i < DIMASK; i++){
+		mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
 		for(j = 0; j < DIMASK; j++){
 			double division = (double)2.0 * VARIANZA;
 			double razonX = (double)( (-DIMASK/2+i) * (-DIMASK/2+i) );
 			double razonY = (double)( (-DIMASK/2+j) * (-DIMASK/2+j) );
 			double contenido = -((razonX+razonY)/division);
-			mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
+			mascara[i][j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);
 		}
-	}
-	for(i = 0; i < DIMASK; i++){
-		for(j = 0; j < DIMASK; j++){
-			printf("%f ",mascara[DIMASK*i+j]);
-		}
-		printf("\n");
-	}
+	}	
 	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
-		{
-			indicem = 0;
+		{			
 			conv = 0;
 			for( ym = 0; ym < DIMASK; ym++ )
 				for( xm = 0; xm < DIMASK; xm++ )
 				{
 					indicei = (y+ym)*width + (x+xm);
-					conv += ((double)imagenG[indicei] * mascara[indicem++]);
+					conv += ((double)imagenG[indicei] * mascara[ym][xm]);
 				}
 			conv = conv / 9;
 			indicei = (y+1)*width + (x+1);
