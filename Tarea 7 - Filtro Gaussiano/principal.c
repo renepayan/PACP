@@ -28,9 +28,9 @@ int main( )
 
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
-    //filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
+    filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
 	
-    GrayToRGB( imagenRGB ,imagenGray, info.width, info.height );
+    GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
     guardarBMP("linuxGauss.bmp", &info, imagenRGB );
 
