@@ -18,7 +18,7 @@ int main( )
 	bmpInfoHeader info;
 	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
 
-	imagenRGB = abrirBMP("dark_forest3.bmp", &info );
+	imagenRGB = abrirBMP("huella.bmp", &info );
 	displayInfo( &info );
 
 	imagenGray = reservarMemoria( info.width, info.height );
@@ -32,7 +32,7 @@ int main( )
 
     GrayToRGB( imagenFiltrada ,imagenGray, info.width, info.height );
 
-    guardarBMP("dark_forestPB.bmp", &info, imagenRGB );
+    guardarBMP("huellaPB.bmp", &info, imagenRGB );
 
     free( imagenFiltrada );
 	free(imagenGray);
