@@ -93,20 +93,21 @@ void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t w
 	//return;
 	for( y = 0; y <= height-DIMASK; y++ )
 		for( x = 0; x <= width-DIMASK; x++ )
-		{
-			int primer = indicem/DIMASK, segundo = indicem%DIMASK;
-			printf("%d %d", primer, segundo);
-			/*indicem = 0;
+		{						
+			indicem = 0;
 			conv = 0;
 			for( ym = 0; ym < DIMASK; ym++ )
 				for( xm = 0; xm < DIMASK; xm++ )
 				{
+					int primer = indicem/DIMASK, segundo = indicem%DIMASK;
+					printf("%d %d\n", primer, segundo);
+					indicem++;
 					indicei = (y+ym)*width + (x+xm);
 					conv += imagenG[indicei] * mascara[primer][segundo];
 				}
 			conv = conv / 9;
 			indicei = (y+1)*width + (x+1);
-			imagenF[indicei] = conv;*/
+			imagenF[indicei] = conv;
 		}
 }
 
