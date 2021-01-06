@@ -24,7 +24,7 @@ int main( )
 	imagenGray = reservarMemoria( info.width, info.height );
     imagenFiltrada = reservarMemoria( info.width, info.height );
 
-    memset( imagenGray, 255, info.width*info.height );
+    memset( imagenFiltrada, 255, info.width*info.height );
 
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
