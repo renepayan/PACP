@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "imagen.h"
-#define DIMASK 3
+#define DIMASK 5
 #define VARIANZA 1
 void RGBToGray( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height );
 void GrayToRGB( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height );
@@ -28,11 +28,11 @@ int main( )
 
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
-    filtroPB(imagenGray, imagenFiltrada, info.width, info.height);
+    filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
 
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
-    guardarBMP("dark_forestPB.bmp", &info, imagenRGB );
+    guardarBMP("dark_forestGauss.bmp", &info, imagenRGB );
 
     free( imagenFiltrada );
 	free(imagenGray);
