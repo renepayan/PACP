@@ -23,20 +23,21 @@ int main( )
 	imagenGray = reservarMemoria( info.width, info.height );
 	imagenFiltrada = reservarMemoria( info.width, info.height );
 	memset( imagenFiltrada, 255, info.width*info.height );
-
+	printf("Reservo memoria\n");
 	RGBToGray( imagenRGB, imagenGray, info.width, info.height );
-
+	printf("Creo el blanco y negro\n");
 	//brilloImagen( imagenGray, info.width, info.height );
 	filtroGaussiano( imagenGray, imagenFiltrada, info.width, info.height );
-
+	printf("Creo el filtro\n");
 	GrayToRGB( imagenRGB, imagenFiltrada, info.width, info.height );
-
+	printf("Lo regreso a color\n");
+	/*
 	guardarBMP("huella1final.bmp", &info, imagenRGB );
 
 	free( imagenRGB );
 	free( imagenGray );
 	free( imagenFiltrada );
-
+	*/
 	return 0;
 }
 
@@ -66,6 +67,7 @@ void filtroPB( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, u
 }
 
 void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, uint32_t height ){
+	
 	register int i, j, x, y, xm, ym;
 	int indicem, indicei, conv;
 	double **mascara;
