@@ -18,7 +18,7 @@ int main( ){
 	//Declaracion de variables
 	register int nh;
 	pthread_t tids[NUM_HILOS];
-	int* hilo;
+	parametroHilo* hilo;
 	unsigned char *imagenRGB, * imagenGray;
 	double* mascara;
 	bmpInfoHeader info;
@@ -60,7 +60,7 @@ int main( ){
 	}
 	for( nh = 0; nh < NUM_HILOS; nh++ ){
         pthread_join( tids[nh], (void**)&hilo);
-		printf("Termino el hilo %d\n", *hilo);
+		printf("Termino el hilo %d\n", hilo->numHilo);
     }	
 
 	//Regresar la imagen a "color" para ser almacenada
