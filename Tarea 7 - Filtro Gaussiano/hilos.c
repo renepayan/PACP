@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <math.h>
 
-
 #include "defs.h"
 #include "helper.h"
 #include "imagen.h"
 
 void* funcionHilo(void* arg){
 
-    parametroHilo *parametrosEntrada = (parametroHilo*)(*arg);
+    parametroHilo *parametrosEntrada = (parametroHilo*) arg;
         
     register int x, y, xm, ym;
     int indicei, indicem;
