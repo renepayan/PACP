@@ -69,9 +69,9 @@ int main( ){
     guardarBMP("huellaGauss.bmp", &info, imagenRGB );
 
 	//Liberar memoria
-    free(imagenFiltrada);
-	free(imagenGray);
-    free(imagenRGB);
+    //free(imagenFiltrada);
+	//free(imagenGray);
+    //free(imagenRGB);
     return 0;
 }
 
