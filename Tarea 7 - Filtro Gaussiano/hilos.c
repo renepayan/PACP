@@ -10,9 +10,11 @@ void* funcionHilo(void* arg){
     parametroHilo *parametrosEntrada = (parametroHilo*) arg;    
     register int x, y, xm, ym;
     int indicei, indicem, inicioHilo, finHilo, conv;
+    
     inicioHilo = (parametrosEntrada->height/NUM_HILOS)*parametrosEntrada->numHilo;    
     finHilo = (parametrosEntrada->numHilo == NUM_HILOS-1)?parametrosEntrada->height-DIMASK:inicioHilo+(parametrosEntrada->height/NUM_HILOS)-1;    
-    for( y = 0; y <= parametrosEntrada->height-DIMASK; y++ ){
+
+    for( y = inicioHilo; y <= finHilo; y++ ){
 		for( x = 0; x <= parametrosEntrada->width-DIMASK; x++ ){			
 			indicem = 0;
 			conv = 0;
