@@ -44,6 +44,7 @@ int main( ){
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
 	//Aplicar el filtro con los hilos
+	printf("Ahora creo los hilos");
 	for(nh = 0; nh < NUM_HILOS; nh++){
 		parametroHilo *parametroParaPasar = (parametroHilo*)malloc(sizeof(parametroHilo));
 		parametroParaPasar->height = info.height;
@@ -52,6 +53,7 @@ int main( ){
 		parametroParaPasar->imagenG = imagenRGB;
 		parametroParaPasar->imagenF = imagenFiltrada;
 		parametroParaPasar->numHilo = nh;
+		printf("%d hilo creado\n",nh);
         if(pthread_create(  &tids[nh], NULL, funcionHilo,  parametroParaPasar )){
             perror("Error al crear el hilo\n");
             exit(EXIT_FAILURE);
