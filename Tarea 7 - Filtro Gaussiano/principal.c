@@ -2,158 +2,77 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <pthread.h>
+
+
 #include "imagen.h"
-#define DIMASK 5
-#define VARIANZA 1
-void RGBToGray( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height );
-void GrayToRGB( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height );
-void brilloImagen( unsigned char *imagenGray, uint32_t width, uint32_t height );
-void filtroPB ( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, uint32_t height );
-void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, uint32_t height );
+#include "helper.h"
+#include "defs.h"
+#include "hilos.h"
+#include "procesamiento.h"
 
-unsigned char * reservarMemoria( uint32_t width, uint32_t height );
 
-int main( )
-{
+unsigned char *imagenFiltrada;
+
+int main( ){		
+	//Declaracion de variables
+	register int nh;
+	pthread_t tids[NUM_HILOS];
+	unsigned char *imagenRGB, * imagenGray;
+	double* mascara;
 	bmpInfoHeader info;
-	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
 
-	imagenRGB = abrirBMP("linux.bmp", &info );
+	//Cargar la imagen inicial
+	imagenRGB = abrirBMP("huella.bmp", &info );
+
+	//Mostrar la informacion con respecto a la imagen
 	displayInfo( &info );
-
+	
+	//Reservar memoria para las imagenes (blanco y negro e imagen final)
 	imagenGray = reservarMemoria( info.width, info.height );
     imagenFiltrada = reservarMemoria( info.width, info.height );
+	mascara = reservarMemoriaMascara();
 
+	//Creacion de la mascara gaussiana
+	llenarMascara(mascara);
+
+	//Inicializacion de la matriz final en blanco
     memset( imagenFiltrada, 255, info.width*info.height );
 
+	//Convertir la imagen a escala de grises
     RGBToGray( imagenRGB, imagenGray, info.width, info.height );
 
-    filtroGaussiano(imagenGray, imagenFiltrada, info.width, info.height);
-	
+	//Aplicar el filtro con los hilos
+	for(nh = 0; nh < NUM_HILOS; nh++){
+		parametroHilo *parametroParaPasar = (parametroHilo*)malloc(sizeof(parametroHilo));
+		parametroParaPasar->height = info.height;
+		parametroParaPasar->width = info.width;
+		parametroParaPasar->mascara = mascara;		
+		parametroParaPasar->imagenG = imagenRGB;
+		parametroParaPasar->imagenF = imagenFiltrada;
+		parametroParaPasar->numHilo = nh;
+        if(pthread_create(  &tids[nh], NULL, funcionHilo,  parametroParaPasar )){
+            perror("Error al crear el hilo\n");
+            exit(EXIT_FAILURE);
+	    }
+	}
+	for( nh = 0; nh < NUM_HILOS; nh++ ){
+        pthread_join( tids[nh], (void**)&hilo);
+		printf("Termino el hilo %d\n", *hilo);
+    }	
+
+	//Regresar la imagen a "color" para ser almacenada
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
 
-    guardarBMP("linuxGauss.bmp", &info, imagenRGB );
 
-    free( imagenFiltrada );
+	//Guardar la imagen en el destino
+    guardarBMP("huellaGauss.bmp", &info, imagenRGB );
+
+	//Liberar memoria
+    free(imagenFiltrada);
 	free(imagenGray);
     free(imagenRGB);
     return 0;
-
-
-
-
-
-	//filtroPB( imagenGray, imagenFiltrada, info.width, info.height );
-
-
-
-    guardarBMP("linux1.bmp", &info, imagenRGB );
-	free( imagenRGB );
-	free( imagenGray );
-
-	return 0;
 }
 
-void filtroPB( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, uint32_t height ){
-	register int x, y, xm, ym;
-	int indicem, indicei, conv;
-	int mascara[DIMASK*DIMASK] = {
-		1, 1, 1,
-		1, 1, 1,
-		1, 1, 1
-	};
-	for( y = 0; y <= height-DIMASK; y++ )
-		for( x = 0; x <= width-DIMASK; x++ )
-		{
-			indicem = 0;
-			conv = 0;
-			for( ym = 0; ym < DIMASK; ym++ )
-				for( xm = 0; xm < DIMASK; xm++ )
-				{
-					indicei = (y+ym)*width + (x+xm);
-					conv += imagenG[indicei] * mascara[indicem++];
-				}
-			conv = conv / 9;
-			indicei = (y+1)*width + (x+1);
-			imagenF[indicei] = conv;
-		}
-}
 
-void filtroGaussiano( unsigned char *imagenG, unsigned char *imagenF, uint32_t width, uint32_t height ){
-
-	register int i, j, x, y, xm, ym;
-	int indicem, indicei, conv;
-	double *mascara;
-	mascara = (double*)malloc(sizeof(double)*(DIMASK*DIMASK));
-	for(i = 0; i < DIMASK; i++){
-		//mascara[i] = (double*)malloc(sizeof(double)*DIMASK);
-		for(j = 0; j < DIMASK; j++){
-			double division = (double)2.0 * VARIANZA;
-			double razonX = (double)( (-DIMASK/2+i) * (-DIMASK/2+i) );
-			double razonY = (double)( (-DIMASK/2+j) * (-DIMASK/2+j) );
-			double contenido = -((razonX+razonY)/division);
-			mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(contenido);			
-		}		
-	}		
-	for( y = 0; y <= height-DIMASK; y++ )
-		for( x = 0; x <= width-DIMASK; x++ )
-		{			
-			indicem = 0;
-			conv = 0;
-			for( ym = 0; ym < DIMASK; ym++ )
-				for( xm = 0; xm < DIMASK; xm++ )
-				{
-					indicei = (y+ym)*width + (x+xm);
-					conv += ((double)imagenG[indicei] * mascara[indicem++]);
-				}			
-			indicei = (y+1)*width + (x+1);
-			imagenF[indicei] = conv;
-		}
-}
-
-void brilloImagen( unsigned char *imagenGray, uint32_t width, uint32_t height )
-{
-	register int indiceGray;
-	int pixel;
-
-	for( indiceGray = 0; indiceGray < (height*width); indiceGray++ )
-	{
-		pixel = imagenGray[indiceGray] + 70;
-		imagenGray[indiceGray] = (pixel > 255)? 255 : (unsigned char)pixel;
-	}
-}
-
-void GrayToRGB( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height )
-{
-	int indiceRGB, indiceGray;
-
-	for( indiceGray = 0, indiceRGB = 0; indiceGray < (height*width); indiceGray++, indiceRGB += 3 )
-	{
-		imagenRGB[indiceRGB]   = imagenGray[indiceGray];
-		imagenRGB[indiceRGB+1] = imagenGray[indiceGray];
-		imagenRGB[indiceRGB+2] = imagenGray[indiceGray];
-	}
-}
-void RGBToGray( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height ){
-	unsigned char nivelGris;
-	int indiceRGB, indiceGray;
-
-	for( indiceGray = 0, indiceRGB = 0; indiceGray < (height*width); indiceGray++, indiceRGB += 3 )
-	{
-		nivelGris = (30*imagenRGB[indiceRGB] + 59*imagenRGB[indiceRGB+1] + 11*imagenRGB[indiceRGB+2]) / 100;
-		imagenGray[indiceGray] = nivelGris;
-	}
-}
-unsigned char * reservarMemoria( uint32_t width, uint32_t height )
-{
-	unsigned char *imagen;
-
-	imagen = (unsigned char *)malloc( width*height*sizeof(unsigned char) );
-	if( imagen == NULL )
-	{
-		perror("Error al asignar memoria a la imagen");
-		exit(EXIT_FAILURE);
-	}
-
-	return imagen;
-}
