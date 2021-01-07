@@ -59,6 +59,7 @@ int main( ){
 	for( nh = 0; nh < NUM_HILOS; nh++ ){
         pthread_join( tids[nh], (void**)&hilo);
 		printf("Termino el hilo %d\n", hilo->numHilo);
+		free(hilo);
     }	
 
 	//Regresar la imagen a "color" para ser almacenada
@@ -68,11 +69,6 @@ int main( ){
 	//Guardar la imagen en el destino
     guardarBMP("huellaGauss.bmp", &info, imagenRGB );
 
-	//Liberar memoria
-	free(mascara);
-    //free(imagenFiltrada);
-	//free(imagenGray);
-    //free(imagenRGB);
     return 0;
 }
 
