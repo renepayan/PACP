@@ -12,14 +12,12 @@
 #include "procesamiento.h"
 
 
-unsigned char *imagenFiltrada;
-
 int main( ){		
 	//Declaracion de variables
 	register int nh;
 	pthread_t tids[NUM_HILOS];
 	parametroHilo* hilo;
-	unsigned char *imagenRGB, * imagenGray;
+	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
 	double* mascara;
 	bmpInfoHeader info;
 
