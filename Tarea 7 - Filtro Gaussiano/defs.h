@@ -3,6 +3,7 @@
 #define DIMASK 5
 #define VARIANZA 1
 #define NUM_HILOS 4
+#include "imagen.h"
 typedef struct parametroHiloTAG{
     int numHilo;
     uint32_t width;
