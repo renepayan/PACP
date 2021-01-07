@@ -47,7 +47,7 @@ int main( ){
 		parametroParaPasar->height = info.height;
 		parametroParaPasar->width = info.width;
 		parametroParaPasar->mascara = mascara;		
-		parametroParaPasar->imagenG = imagenRGB;
+		parametroParaPasar->imagenG = imagenGray;
 		parametroParaPasar->imagenF = imagenFiltrada;
 		parametroParaPasar->numHilo = nh;
 		printf("hilo %d creado\n",nh);
