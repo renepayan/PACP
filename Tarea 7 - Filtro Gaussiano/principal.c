@@ -18,7 +18,7 @@ int main( ){
 	//Declaracion de variables
 	register int nh;
 	pthread_t tids[NUM_HILOS];
-	int hilo;
+	int* hilo;
 	unsigned char *imagenRGB, * imagenGray;
 	double* mascara;
 	bmpInfoHeader info;
