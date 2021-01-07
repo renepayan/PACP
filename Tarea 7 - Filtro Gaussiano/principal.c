@@ -62,7 +62,7 @@ int main( ){
     }	
 
 	//Regresar la imagen a "color" para ser almacenada
-    GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
+    GrayToRGB( imagenRGB ,imagenGray, info.width, info.height );
 
 
 	//Guardar la imagen en el destino
