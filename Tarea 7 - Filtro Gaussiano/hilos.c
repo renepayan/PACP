@@ -12,14 +12,13 @@ void* funcionHilo(void* arg){
     int indicei, indicem;
     int inicioHilo, finHilo, conv;
     inicioHilo = (parametrosEntrada->height/NUM_HILOS)*parametrosEntrada->numHilo;    
-    finHilo = (parametrosEntrada->numHilo == NUM_HILOS-1)?parametrosEntrada->height-DIMASK:inicioHilo+(parametrosEntrada->height/NUM_HILOS)-1;    
+    finHilo = (parametrosEntrada->numHilo == NUM_HILOS-1)?parametrosEntrada->height-DIMASK:inicioHilo+(parametrosEntrada->height/NUM_HILOS)-DIMASK;    
     for( y = inicioHilo; y <= finHilo; y++ ){
 		for( x = 0; x <= parametrosEntrada->width-DIMASK; x++ ){			
 			indicem = 0;
 			conv = 0;
 			for( ym = 0; ym < DIMASK; ym++ )
-				for( xm = 0; xm < DIMASK; xm++ )
-				{
+				for( xm = 0; xm < DIMASK; xm++ ){
 					indicei = (y+ym)*parametrosEntrada->width + (x+xm);
 					conv += ((double)parametrosEntrada->imagenG[indicei] * parametrosEntrada->mascara[indicem++]);
 				}			
