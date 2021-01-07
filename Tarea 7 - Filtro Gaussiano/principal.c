@@ -70,8 +70,6 @@ int main( ){
 
 	//Liberar memoria
 	free(mascara);
-	free(imagenRGB);
-	free(imagenGray);
     //free(imagenFiltrada);
 	//free(imagenGray);
     //free(imagenRGB);
