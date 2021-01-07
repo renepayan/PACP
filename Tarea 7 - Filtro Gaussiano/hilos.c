@@ -15,9 +15,9 @@ void* funcionHilo(void* arg){
 
     finHilo = (parametrosEntrada->numHilo == NUM_HILOS-1)?parametrosEntrada->height:inicioHilo+(parametrosEntrada->height/NUM_HILOS);
     
-    printf("hola soy le hilo %d y abarco desde %d hasta %d\n", parametrosEntrada->numHilo, inicioHilo, finHilo);
+    printf("hola soy el hilo %d y abarco desde %d hasta %d\n", parametrosEntrada->numHilo, inicioHilo, finHilo);
 
-    /*for( y = inicioHilo; y <= finHilo; y++ ){
+    for( y = inicioHilo; y <= finHilo; y++ ){
 		for( x = 0; x <= parametrosEntrada->width-DIMASK; x++ ){			
 			indicem = 0;
 			conv = 0;
@@ -30,7 +30,7 @@ void* funcionHilo(void* arg){
 			indicei = (y+1)*parametrosEntrada->width + (x+1);
 			parametrosEntrada->imagenF[indicei] = conv;
 		}
-    }*/
+    }
     pthread_exit((void*)parametrosEntrada->numHilo);
-    return NULL;
+    //return NULL;
 }
