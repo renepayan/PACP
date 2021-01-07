@@ -28,6 +28,6 @@ void* funcionHilo(void* arg){
 		}
     }
     printf("hola soy el hilo %d y abarco desde %d hasta %d\n", parametrosEntrada->numHilo, inicioHilo, finHilo);
-    pthread_exit((void*)parametrosEntrada->numHilo);
+    pthread_exit(parametrosEntrada->numHilo);
     return NULL;
 }
