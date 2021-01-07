@@ -6,7 +6,7 @@
 #include "imagen.h"
 
 void* funcionHilo(void* arg){
-
+    printf("llega aqui");
     parametroHilo *parametrosEntrada = (parametroHilo*) arg;    
     register int x, y, xm, ym;
     int indicei, indicem;
