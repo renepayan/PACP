@@ -14,6 +14,8 @@
 
 int main( ){		
 	//Declaracion de variables
+	char pathEntrada[256];
+	char pathSalida[256];
 	register int nh;
 	pthread_t tids[NUM_HILOS];
 	parametroHilo* hilo;
@@ -21,8 +23,14 @@ int main( ){
 	double* mascara;
 	bmpInfoHeader info;
 
+	//Leer el archivo de entrada y salida
+	printf("Ingrese la ruta de la imagen: ");
+	scanf("%s", pathEntrada);
+	printf("Ingrese la ruta de la salida: ");
+	scanf("%s",pathSalida);
+
 	//Cargar la imagen inicial
-	imagenRGB = abrirBMP("huella.bmp", &info );
+	imagenRGB = abrirBMP(pathEntrada, &info );
 
 	//Mostrar la informacion con respecto a la imagen
 	displayInfo( &info );
@@ -66,7 +74,7 @@ int main( ){
 
 
 	//Guardar la imagen en el destino
-    guardarBMP("huellaGauss.bmp", &info, imagenRGB );
+    guardarBMP(pathSalida, &info, imagenRGB );
 
     return 0;
 }

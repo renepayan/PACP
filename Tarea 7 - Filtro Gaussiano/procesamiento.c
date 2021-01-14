@@ -28,7 +28,7 @@ void llenarMascara(double *mascara){
             razonX = (double)( (-DIMASK/2+i) * (-DIMASK/2+i) );
             razonY = (double)( (-DIMASK/2+j) * (-DIMASK/2+j) );
             exponente = -((razonX+razonY)/division);
-            mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(exponente);			
+            mascara[DIMASK*i+j] = ((double)1.0/(double)(2*M_PI*VARIANZA))*exp(exponente);	
         }		
     }	
 }
