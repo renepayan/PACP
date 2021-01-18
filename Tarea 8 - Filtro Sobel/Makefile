@@ -24,4 +24,4 @@ install: all
 uninstall:
 	sudo rm -rf $(DESTDIR)/$(PROYECTO)
 zip:
-	zip $(PROYECTO).zip *.c Makefile
+	zip $(PROYECTO).zip *.c *.h *.bmp Makefile
