@@ -42,6 +42,7 @@ int main( ){
    		}
 		pid = fork();
 		if( !pid ){
+			printf("Tomando foto\n");
 			//Cargar la imagen inicial
 			imagenRGB = abrirBMP("huella1.bmp", &info );
 
@@ -56,7 +57,7 @@ int main( ){
 
 			//Convertir la imagen a escala de grises
 			RGBToGray( imagenRGB, imagenGray, info.width, info.height );
-
+			printf("Aplicando filtro\n");
 			//Aplicar el filtro con los hilos
 			for(nh = 0; nh < NUM_HILOS; nh++){
 				parametroHilo *parametroParaPasar = (parametroHilo*)malloc(sizeof(parametroHilo));
@@ -76,6 +77,7 @@ int main( ){
 				printf("Termino el hilo %d\n", hilo->numHilo);		
 			}
 			tamImagen = info.width * info.height;
+			printf("Enviando imagen al servidor\n");
 			atiendeCliente( cliente_sockfd, &info, imagenFiltrada, tamImagen );
 		}
 	}
