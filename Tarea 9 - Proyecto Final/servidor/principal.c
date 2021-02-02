@@ -44,7 +44,7 @@ int main( ){
 		if( !pid ){
 			printf("Tomando foto\n");
 			//Cargar la imagen inicial
-			imagenRGB = abrirBMP("huella1.bmp", &info );
+			imagenRGB = abrirBMP("samus.bmp", &info );
 
 			//Mostrar la informacion con respecto a la imagen
 			displayInfo( &info );
