@@ -39,7 +39,7 @@ unsigned char *abrirBMP(char *filename, bmpInfoHeader *bInfoHeader)
 
   	/* Reservamos memoria para la imagen, ¿cuánta?
      	Tanto como indique imgsize */
-  	imgdata = (unsigned char *)malloc( bInfoHeader->imgsize );
+  	imgdata = (unsigned char *)malloc( bInfoHeader->height*bInfoHeader->width*3 );
 	if( imgdata == NULL )
 	{
 		perror("Error al asignar memoria");
@@ -50,7 +50,7 @@ unsigned char *abrirBMP(char *filename, bmpInfoHeader *bInfoHeader)
   	fseek(f, header.offset, SEEK_SET);
 
   	/* Leemos los datos de imagen, tantos bytes como imgsize */
-  	fread(imgdata, bInfoHeader->imgsize,1, f);
+  	fread(imgdata, bInfoHeader->height*bInfoHeader->width*3,1, f);
 
   	/* Cerramos el apuntador del archivo de la imagen*/
   	fclose(f);
@@ -72,7 +72,7 @@ void guardarBMP( char *filename, bmpInfoHeader *info, unsigned char *imgdata )
 		exit(EXIT_FAILURE);
 	}
 
-  	header.size = info->imgsize + sizeof(bmpFileHeader) + sizeof(bmpInfoHeader);
+  	header.size = info->height*info->width*3 + sizeof(bmpFileHeader) + sizeof(bmpInfoHeader);
   	/* header.resv1=0; */
   	/* header.resv2=1; */
   	/* El offset será el tamaño de las dos cabeceras + 2 (información de fichero)*/
