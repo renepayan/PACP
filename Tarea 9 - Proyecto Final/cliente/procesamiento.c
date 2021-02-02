@@ -1,5 +1,14 @@
 #include <math.h>
-
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#include <pthread.h>
+#include <unistd.h>
 #include "imagen.h"
 #include "defs.h"
 

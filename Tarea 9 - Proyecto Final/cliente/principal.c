@@ -17,12 +17,7 @@
 
 int main( ){		
 	//Declaracion de variables
-	char pathEntrada[256];
-	char pathSalida[256];
-	register int nh;
-	pthread_t tids[NUM_HILOS];
-	parametroHilo* hilo;
-	unsigned char *imagenRGB, *imagenGray, *imagen;
+	unsigned char *imagenRGB, *imagen;
 	bmpInfoHeader info;
 	int sockfd;
 	struct sockaddr_in direccion_servidor;
