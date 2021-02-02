@@ -7,4 +7,5 @@ void llenarMascara(double *mascara);
 void manejador( int sig );
 void atiendeCliente( int cliente_sockfd, unsigned char *imagenGray, int tamImagen );
 void iniSignals( );
+int iniServidor( );
 #endif

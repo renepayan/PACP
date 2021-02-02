@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <pthread.h>
-
+#include <stdio.h> 
+#include <sys/types.h> 
+#include <unistd.h> 
 
 #include "imagen.h"
 #include "helper.h"
