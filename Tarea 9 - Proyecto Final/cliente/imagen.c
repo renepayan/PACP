@@ -98,8 +98,8 @@ void displayInfo( bmpInfoHeader *info )
   	printf("Bits por pixel: %d\n", info->bpp);
   	printf("Compresión: %d\n", info->compress);
   	printf("Tamaño de datos de imagen: %u\n", info->imgsize);
-  	printf("Resolucón horizontal: %u\n", info->bpmx);
-  	printf("Resolucón vertical: %u\n", info->bpmy);
+  	printf("Resolución horizontal: %u\n", info->bpmx);
+  	printf("Resolución vertical: %u\n", info->bpmy);
   	printf("Colores en paleta: %d\n", info->colors);
   	printf("Colores importantes: %d\n", info->imxtcolors);
 }
