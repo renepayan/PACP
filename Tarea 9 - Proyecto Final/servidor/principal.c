@@ -11,25 +11,16 @@
 #include "hilos.h"
 #include "procesamiento.h"
 
-
+int finPrograma;
 int main( ){		
 	//Declaracion de variables
-	char pathEntrada[256];
-	char pathSalida[256];
-	register int nh;
-	pthread_t tids[NUM_HILOS];
-	parametroHilo* hilo;
-	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
-	bmpInfoHeader info;
-
-	//Leer el archivo de entrada y salida
-	printf("Ingrese la ruta de la imagen: ");
-	scanf("%s", pathEntrada);
-	printf("Ingrese la ruta de la salida: ");
-	scanf("%s",pathSalida);
-
+	pid_t pid;
+   	int cliente_sockfd, sockfd;
+    bmpInfoHeader info;
+    unsigned char *imagenRGB, *imagenGray;
+	int tamImagen;
 	//Cargar la imagen inicial
-	imagenRGB = abrirBMP(pathEntrada, &info );
+	imagenRGB = abrirBMP("huella1.bmp", &info );
 
 	//Mostrar la informacion con respecto a la imagen
 	displayInfo( &info );
@@ -64,12 +55,22 @@ int main( ){
 
 	//Regresar la imagen a "color" para ser almacenada
     GrayToRGB( imagenRGB ,imagenFiltrada, info.width, info.height );
-
-
-	//Guardar la imagen en el destino
-    guardarBMP(pathSalida, &info, imagenRGB );
-
+	finPrograma = 0;
+	iniSignals( );
+	sockfd = iniServidor( );
+	for( ; !finPrograma ; ){
+	   	printf ("En espera de peticiones de conexión ...\n");
+   		if( (cliente_sockfd = accept(sockfd, NULL, NULL)) < 0 ){
+			perror("Ocurrio algun problema al atender a un cliente");
+			exit(1);
+   		}
+		pid = fork();
+		if( !pid ){
+			atiendeCliente( cliente_sockfd, imagenGray, tamImagen );
+		}
+	}
+	close (sockfd);
+	free( imagenRGB );
+	free( imagenGray );
     return 0;
 }
-
-
