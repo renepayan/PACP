@@ -6,6 +6,11 @@
 #include <stdio.h> 
 #include <sys/types.h> 
 #include <unistd.h> 
+#include <sys/wait.h>
+#include <signal.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
 
 #include "imagen.h"
 #include "helper.h"
