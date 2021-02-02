@@ -113,7 +113,12 @@ int iniServidor( ){
 
 	return sockfd;
 }
-void atiendeCliente( int cliente_sockfd, unsigned char *imagenGray, int tamImagen ){
+void atiendeCliente( int cliente_sockfd, bmpInfoHeader *info, unsigned char *imagenGray, int tamImagen ){
+    printf("Se aceptó un cliente, enviando cabezera... \n");
+    if( write (cliente_sockfd, info, sizeof(bmpInfoHeader)) < 0 ){
+		perror("Ocurrio un problema en el envio de la cabezera");
+		exit(EXIT_FAILURE);
+    }
 	printf("Se aceptó un cliente, enviando imagen... \n");
 	if( write (cliente_sockfd, imagenGray, tamImagen) < 0 ){
 		perror("Ocurrio un problema en el envio de la imagen");

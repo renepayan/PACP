@@ -74,7 +74,7 @@ int main( ){
 				printf("Termino el hilo %d\n", hilo->numHilo);		
 			}
 			tamImagen = info.width * info.height;
-			atiendeCliente( cliente_sockfd, imagenGray, tamImagen );
+			atiendeCliente( cliente_sockfd, &info, imagenGray, tamImagen );
 		}
 	}
 	close (sockfd);
