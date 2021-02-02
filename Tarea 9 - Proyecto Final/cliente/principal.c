@@ -50,8 +50,6 @@ int main( ){
 	recibirImagen( sockfd, imagen, info.width*info.height );
 	GrayToRGB( imagenRGB, imagen, info.width, info.height);
 	guardarBMP( "salida.bmp", &info, imagenRGB );
-
-	printf("El servidor recibio la imagen\n");
 	printf ("Cerrando la aplicacion cliente\n");	
 
     return 0;
