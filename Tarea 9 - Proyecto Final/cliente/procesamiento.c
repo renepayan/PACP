@@ -32,3 +32,24 @@ void llenarMascara(double *mascara){
         }		
     }	
 }
+void recibirImagen( int sockfd, unsigned char *imagen, int tamImagen ){
+	int bytesRecibidos;
+	/* La función read regresa el número de bytes que se leyeron, la función read
+	los bytes dentro de una trama mtu, la cual tenemos configurada por defecto con un
+	tamaño de 1500 bytes */
+	while( tamImagen > 0){ /* Si el tamaño de la imagen es mayor a cero, significa que aún siguen habiendo bytes sin leer*/
+		bytesRecibidos = read (sockfd, imagen, tamImagen);    
+		if( bytesRecibidos < 0){
+			perror ("Ocurrio algun problema al recibir imagen del servidor");
+			exit(1);
+		}
+		printf("Bytes recibidos: %d\n", bytesRecibidos);
+		/* Actualizamos el tamaño de la imagen a leer, ya que ahora le restaremos los bytes que ya se leyeron*/
+		tamImagen -= bytesRecibidos;
+		/* El apuntador de la imagen también tiene que desplazarse, para que ahora
+		el nuevo bloque de datos de la imagen se escriba en la siguiente dirección de memoria */
+		imagen += bytesRecibidos;
+	}
+	
+
+}
