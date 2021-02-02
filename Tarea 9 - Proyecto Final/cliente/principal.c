@@ -22,7 +22,7 @@ int main( ){
 	register int nh;
 	pthread_t tids[NUM_HILOS];
 	parametroHilo* hilo;
-	unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
+	unsigned char *imagenRGB, *imagenGray, *imagen;
 	bmpInfoHeader info;
 	int sockfd;
 	struct sockaddr_in direccion_servidor;
