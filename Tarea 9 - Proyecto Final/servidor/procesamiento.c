@@ -42,30 +42,7 @@ void llenarMascara(double *mascara){
         }		
     }	
 }
-void manejador( int sig ){
-	int estado;
-	pid_t pid;
-	if( sig == SIGCHLD ){
-		printf("Se recibio la señal SIGCHLD en el servidor\n");
-		pid = wait(&estado);
-		printf("Termino el proceso %d con estado: %d\n", pid, estado>>8);
-	}else if( sig == SIGINT ){
-		printf("Se recibio la señal SIGINT en el servidor\n");
-	   	printf("Concluimos la ejecución de la aplicacion Servidor \n");
-		finPrograma = 1;
-	}
-}
-void iniSignals( ){
-	if( signal( SIGCHLD, manejador) == SIG_ERR ){
-		perror("Error en el manejador");
-		exit(EXIT_FAILURE);
-	}
 
-	if( signal( SIGINT, manejador) == SIG_ERR ){
-		perror("Error en el manejador");
-		exit(EXIT_FAILURE);
-	}
-}
 int iniServidor( ){
    	struct sockaddr_in direccion_servidor; //Estructura de la familia AF_INET, que almacena direccion
 	int sockfd;

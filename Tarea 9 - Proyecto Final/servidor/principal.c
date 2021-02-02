@@ -19,6 +19,8 @@
 #include "procesamiento.h"
 
 int finPrograma;
+void manejador( int sig );
+void iniSignals( );
 int main( ){		
 	//Declaracion de variables
 	pid_t pid;
@@ -81,4 +83,28 @@ int main( ){
 	free( imagenRGB );
 	free( imagenGray );
     return 0;
+}
+void manejador( int sig ){
+	int estado;
+	pid_t pid;
+	if( sig == SIGCHLD ){
+		printf("Se recibio la señal SIGCHLD en el servidor\n");
+		pid = wait(&estado);
+		printf("Termino el proceso %d con estado: %d\n", pid, estado>>8);
+	}else if( sig == SIGINT ){
+		printf("Se recibio la señal SIGINT en el servidor\n");
+	   	printf("Concluimos la ejecución de la aplicacion Servidor \n");
+		finPrograma = 1;
+	}
+}
+void iniSignals( ){
+	if( signal( SIGCHLD, manejador) == SIG_ERR ){
+		perror("Error en el manejador");
+		exit(EXIT_FAILURE);
+	}
+
+	if( signal( SIGINT, manejador) == SIG_ERR ){
+		perror("Error en el manejador");
+		exit(EXIT_FAILURE);
+	}
 }
