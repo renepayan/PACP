@@ -25,7 +25,7 @@ int main( ){
    	int cliente_sockfd, sockfd;
     bmpInfoHeader info;
     unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
-	int tamImagen;
+	int tamImagen = 0;
 	register int nh;
 	pthread_t tids[NUM_HILOS];
 	parametroHilo* hilo;			
