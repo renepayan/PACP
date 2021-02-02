@@ -34,7 +34,7 @@ int main( ){
 	finPrograma = 0;
 	iniSignals( );
 	sockfd = iniServidor( );
-	for( ; !finPrograma ; ){
+	while(finPrograma == 0){
 	   	printf ("En espera de peticiones de conexión ...\n");
    		if( (cliente_sockfd = accept(sockfd, NULL, NULL)) < 0 ){
 			perror("Ocurrio algun problema al atender a un cliente");

@@ -12,7 +12,6 @@
 #include "imagen.h"
 #include "defs.h"
 
-extern int finPrograma;
 void GrayToRGB( unsigned char *imagenRGB, unsigned char *imagenGray, uint32_t width, uint32_t height ){
     int indiceRGB, indiceGray;
 	for( indiceGray = 0, indiceRGB = 0; indiceGray < (height*width); indiceGray++, indiceRGB += 3 ){
