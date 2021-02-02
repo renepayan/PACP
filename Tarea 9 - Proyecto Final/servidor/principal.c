@@ -78,7 +78,7 @@ int main( ){
 			}
 			tamImagen = info.width * info.height;
 			printf("Enviando imagen al servidor\n");
-			atiendeCliente( cliente_sockfd, &info, imagenFiltrada, tamImagen );
+			atiendeCliente( cliente_sockfd, &info, imagenGray, tamImagen );
 		}
 	}
 	close (sockfd);
