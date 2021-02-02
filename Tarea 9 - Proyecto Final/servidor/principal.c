@@ -68,6 +68,7 @@ int main( ){
 				pthread_join( tids[nh], (void**)&hilo);
 				printf("Termino el hilo %d\n", hilo->numHilo);		
 			}
+			tamImagen = info.width * info.height;
 			atiendeCliente( cliente_sockfd, imagenFiltrada, tamImagen );
 		}
 	}
