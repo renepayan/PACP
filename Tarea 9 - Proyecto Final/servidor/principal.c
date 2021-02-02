@@ -22,19 +22,25 @@ int finPrograma;
 void manejador( int sig );
 void iniSignals( );
 int main( ){		
+	//aleatorio para el nombre
+	srand (time(NULL));
 	//Declaracion de variables
 	pid_t pid;
-   	int cliente_sockfd, sockfd;
+   	int cliente_sockfd, sockfd, tamImagen, aleatorio;;
     bmpInfoHeader info;
-    unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;
-	int tamImagen = 0;
+    unsigned char *imagenRGB, *imagenGray, *imagenFiltrada;	
 	register int nh;
 	pthread_t tids[NUM_HILOS];
 	parametroHilo* hilo;			
 	finPrograma = 0;
 	iniSignals( );
 	sockfd = iniServidor( );
-	while(finPrograma == 0){
+	char nombreArchivo[10], *comandoFoto, *comandoConversion;
+
+	//Inicializacion de los strings	
+	comandoFoto = (char*)malloc(sizeof(char)*80);
+	comandoConversion = (char*)malloc(sizeof(char)*80);
+	while(!finPrograma){
 	   	printf ("En espera de peticiones de conexión ...\n");
    		if( (cliente_sockfd = accept(sockfd, NULL, NULL)) < 0 ){
 			perror("Ocurrio algun problema al atender a un cliente");
@@ -43,9 +49,19 @@ int main( ){
 		pid = fork();
 		if( !pid ){
 			printf("Tomando foto\n");
-			//Cargar la imagen inicial
-			imagenRGB = abrirBMP("salida1.bmp", &info );
-
+			//Crear el nombre del archivo de la foto a tomar
+			aleatorio = rand();	
+			sprintf(nombreArchivo, "foto%d.bmp",aleatorio);
+			sprintf(comandoFoto,"raspistill -o %s -e bmp", nombreArchivo);
+			sprintf(comandoConversion,"convert %s BMP3:%s", nombreArchivo,nombreArchivo);
+			//Tomar foto			
+			system(comandoFoto);
+			//Convertir la foto a BMP3 (normalmente se toman en BMP 4 o BMP 5)
+			printf("convirtiendo foto\n");
+			system(comandoConversion);
+			imagenRGB = abrirBMP(nombreArchivo, &info );
+			//Elimino la imagen
+			remove(nombreArchivo);
 			//Mostrar la informacion con respecto a la imagen
 			displayInfo( &info );
 			
@@ -78,7 +94,7 @@ int main( ){
 			}
 			tamImagen = info.width * info.height;
 			printf("Enviando imagen al servidor\n");
-			atiendeCliente( cliente_sockfd, &info, imagenGray, tamImagen );
+			atiendeCliente( cliente_sockfd, &info, imagenFiltrada, tamImagen );
 		}
 	}
 	close (sockfd);
