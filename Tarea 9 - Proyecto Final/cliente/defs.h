@@ -6,7 +6,7 @@
 #include "imagen.h"
 #define PUERTO 5000
 #define TAM_BUFFER 100
-#define DIR_IP "127.0.0.1"
+#define DIR_IP "192.168.10.226"
 typedef struct parametroHiloTAG{
     int numHilo;
     uint32_t width;
